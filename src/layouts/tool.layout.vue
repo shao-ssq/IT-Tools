@@ -32,7 +32,8 @@ const toolDescription = computed<string>(() => t(`tools.${i18nKey.value}.descrip
 
 <template>
   <BaseLayout>
-    <div class="tool-layout">
+    <!-- 删除中间页面 -->
+    <!-- <div class="tool-layout">
       <div class="tool-header">
         <div flex flex-nowrap items-center justify-between>
           <n-h1>
@@ -50,7 +51,7 @@ const toolDescription = computed<string>(() => t(`tools.${i18nKey.value}.descrip
           {{ toolDescription }}
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="tool-content">
       <slot />
