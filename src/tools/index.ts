@@ -1,11 +1,31 @@
 import type { ToolCategory } from '@/tools/tools.types';
-import { googleTool } from '@/tools/google';
+import { jsonTools } from '@/tools/jsonx';
+import { promptTools } from '@/tools/prompt';
+import { regexTools } from '@/tools/regex';
+import { aipptTools } from '@/tools/ppt';
+import { mindTools } from '@/tools/mind';
+import { codeMap } from '@/tools/code';
 
 export const toolsByCategory: ToolCategory[] = [
   {
-    name: 'Text',
+    name: 'text',
     components: [
-      googleTool,
+      jsonTools,
+      promptTools,
+      regexTools,
+    ],
+  },
+  {
+    name: '设计',
+    components: [
+      aipptTools,
+      mindTools,
+    ],
+  },
+  {
+    name: 'Code',
+    components: [
+      codeMap,
     ],
   },
 ];
@@ -14,4 +34,3 @@ export const tools = toolsByCategory.flatMap(({ components }) => components);
 export const toolsWithCategory = toolsByCategory.flatMap(({ components, name }) =>
   components.map(tool => ({ category: name, ...tool })),
 );
-

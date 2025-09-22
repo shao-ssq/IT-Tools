@@ -1,6 +1,6 @@
 <template>
   <iframe
-    src="http://127.0.0.1/"
+    src="http://172.21.3.56:8288"
     class="full-iframe"
   />
 </template>
