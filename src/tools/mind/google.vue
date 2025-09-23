@@ -1,6 +1,6 @@
 <template>
   <iframe
-    src="http://www.baidu.com/"
+    src="http://172.21.3.56:8200/"
     class="full-iframe"
   />
 </template>
