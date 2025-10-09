@@ -5,6 +5,7 @@ import { regexTools } from '@/tools/regex';
 import { aipptTools } from '@/tools/ppt';
 import { mindTools } from '@/tools/mind';
 import { codeMap } from '@/tools/code';
+import { mermaid } from '@/tools/mermaid';
 
 export const toolsByCategory: ToolCategory[] = [
   {
@@ -20,6 +21,7 @@ export const toolsByCategory: ToolCategory[] = [
     components: [
       aipptTools,
       mindTools,
+      mermaid,
     ],
   },
   {

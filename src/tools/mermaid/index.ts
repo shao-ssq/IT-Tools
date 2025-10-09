@@ -1,11 +1,11 @@
-import { Sitemap } from '@vicons/tabler';
+import { ArrowsShuffle } from '@vicons/tabler';
 import { defineTool } from '../tool';
 
-export const mindTools = defineTool({
+export const mermaid = defineTool({
   name: 'Smart Mermaid',
   path: '/mermaid',
-  description: '自动生成流程图、时序图、类图，一键可视化复杂逻辑。',
-  keywords: ['正则', 'regex', '可视化'],
+  description: 'AI 自动生成流程图、时序图、类图，一键可视化复杂逻辑。',
+  keywords: ['流程图', '时序图', '类图'],
   component: () => import('./google.vue'),
-  icon: Sitemap,
+  icon: ArrowsShuffle,
 });
