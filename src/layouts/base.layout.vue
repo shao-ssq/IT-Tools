@@ -2,7 +2,7 @@
 import { NIcon, useThemeVars } from 'naive-ui';
 
 import { RouterLink } from 'vue-router';
-import { Heart, Home2, Menu2 } from '@vicons/tabler';
+import { Menu2 } from '@vicons/tabler';
 
 import { storeToRefs } from 'pinia';
 import HeroGradient from '../assets/hero-gradient.svg?component';
@@ -68,9 +68,10 @@ function toggleSider() {
 
           <div v-if="!isCollapsed" class="footer" />
         </div>
-        <button class="sider-toggle-btn-fixed" @click="toggleSider">
-          <span v-if="isCollapsed">&gt;</span>
-          <span v-else>&lt;</span>
+        <button class="sider-toggle-btn-fixed" :class="{ collapsed: isCollapsed }" @click="toggleSider" aria-label="Toggle menu">
+          <NIcon>
+            <Menu2 />
+          </NIcon>
         </button>
       </div>
     </template>
@@ -82,16 +83,6 @@ function toggleSider() {
 </template>
 
 <style lang="less" scoped>
-// ::v-deep(.n-layout-scroll-container) {
-//     @percent: 4%;
-//     @position: 25px;
-//     @size: 50px;
-//     @color: #eeeeee25;
-//     background-image: radial-gradient(@color @percent, transparent @percent),
-//         radial-gradient(@color @percent, transparent @percent);
-//     background-position: 0 0, @position @position;
-//     background-size: @size @size;
-// }
 
 .support-button {
   background: rgb(37, 99, 108);
@@ -113,35 +104,55 @@ function toggleSider() {
   padding: 20px 0;
 }
 
-
 .sider-main-wrapper {
   position: relative;
   height: 100%;
 }
 
 .sider-toggle-btn-fixed {
-  position: absolute;
-  top: 50%;
-  right: -16px;
-  transform: translateY(-50%);
-  z-index: 100;
-  width: 32px;
-  height: 48px;
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 0 8px 8px 0;
-  box-shadow: 0 2px 8px #0001;
+  position: fixed;
+  top: 150px;
+  left: 0;
+  transform: translateY(-50%) translateX(-50%);
+  z-index: 9999;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #888;
-  font-size: 20px;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, left 0.2s;
+  box-shadow: none;
 }
-.sider-toggle-btn-fixed:hover {
-  background: v-bind('themeVars.primaryColor');
-  color: #fff;
+.sider-toggle-btn-fixed.collapsed {
+  left: 10px;
+}
+.sider-toggle-btn-fixed:not(.collapsed) {
+  left: 18px; /* 侧边栏展开宽度，根据实际宽度调整 */
+}
+
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  gap: 5px;
+}
+.hamburger-icon span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: #16c172;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+.sider-toggle-btn-fixed.collapsed .hamburger-icon span {
+  background: #16c172;
 }
 
 .sider-content {
@@ -188,6 +199,3 @@ function toggleSider() {
   }
 }
 </style>
-.sider-main-wrapper {
-.sider-main-wrapper {
-.sider-main-wrapper {
