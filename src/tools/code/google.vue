@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted } from 'vue';
-import FavoriteButton from '@/components/FavoriteButton.vue';
 
 onMounted(() => {
   window.open('https://172.22.1.93/', '_blank')
