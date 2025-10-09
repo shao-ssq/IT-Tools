@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { useStyleStore } from '@/stores/style.store';
-
-const styleStore = useStyleStore();
-const { isMenuCollapsed, isSmallScreen } = toRefs(styleStore);
-const siderPosition = computed(() => (isSmallScreen.value ? 'absolute' : 'static'));
+const props = defineProps<{ collapsed?: boolean; isSmallScreen?: boolean }>();
+const siderPosition = computed(() => (props.isSmallScreen ? 'absolute' : 'static'));
 </script>
 
 <template>
@@ -13,7 +10,7 @@ const siderPosition = computed(() => (isSmallScreen.value ? 'absolute' : 'static
       collapse-mode="width"
       :collapsed-width="0"
       :width="200"
-      :collapsed="isMenuCollapsed"
+      :collapsed="collapsed"
       :show-trigger="false"
       :native-scrollbar="false"
       :position="siderPosition"
@@ -22,7 +19,7 @@ const siderPosition = computed(() => (isSmallScreen.value ? 'absolute' : 'static
     </n-layout-sider>
     <n-layout class="content">
       <slot name="content" />
-      <div v-show="isSmallScreen && !isMenuCollapsed" class="overlay" @click="isMenuCollapsed = true" />
+      <!-- overlay 逻辑交由父组件控制，这里移除 -->
     </n-layout>
   </n-layout>
 </template>

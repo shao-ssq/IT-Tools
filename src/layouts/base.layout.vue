@@ -26,41 +26,52 @@ const { t } = useI18n();
 const toolStore = useToolStore();
 const { favoriteTools, toolsByCategory } = storeToRefs(toolStore);
 
+
 const tools = computed<ToolCategory[]>(() => [
   ...(favoriteTools.value.length > 0 ? [{ name: t('tools.categories.favorite-tools'), components: favoriteTools.value }] : []),
   ...toolsByCategory.value,
 ]);
+
+const isCollapsed = ref(false);
+function toggleSider() {
+  isCollapsed.value = !isCollapsed.value;
+}
 </script>
 
 <template>
-  <MenuLayout class="menu-layout" :class="{ isSmallScreen: styleStore.isSmallScreen }">
+  <MenuLayout class="menu-layout" :class="{ isSmallScreen: styleStore.isSmallScreen }" :collapsed="isCollapsed" :isSmallScreen="styleStore.isSmallScreen">
     <template #sider>
-      <RouterLink to="/" class="hero-wrapper">
-        <HeroGradient class="gradient" />
-        <div class="text-wrapper">
-          <div class="title">
-            天工 AI
+      <div class="sider-main-wrapper">
+        <RouterLink v-if="!isCollapsed" to="/" class="hero-wrapper">
+          <HeroGradient class="gradient" />
+          <div class="text-wrapper">
+            <div class="title">
+              天工 AI
+            </div>
+            <div class="divider" />
+            <div class="subtitle">
+              {{ $t('home.subtitle') }}
+            </div>
           </div>
-          <div class="divider" />
-          <div class="subtitle">
-            {{ $t('home.subtitle') }}
+        </RouterLink>
+
+        <div class="sider-content" :class="{ collapsed: isCollapsed }">
+          <div v-if="styleStore.isSmallScreen && !isCollapsed" flex flex-col items-center>
+            <locale-selector w="90%" />
+
+            <div flex justify-center>
+              <NavbarButtons />
+            </div>
           </div>
+
+          <CollapsibleToolMenu :tools-by-category="tools" :collapsed="isCollapsed" />
+
+          <div v-if="!isCollapsed" class="footer" />
         </div>
-      </RouterLink>
-
-      <div class="sider-content">
-        <div v-if="styleStore.isSmallScreen" flex flex-col items-center>
-          <locale-selector w="90%" />
-
-          <div flex justify-center>
-            <NavbarButtons />
-          </div>
-        </div>
-
-        <CollapsibleToolMenu :tools-by-category="tools" />
-
-        <div class="footer">
-        </div>
+        <button class="sider-toggle-btn-fixed" @click="toggleSider">
+          <span v-if="isCollapsed">&gt;</span>
+          <span v-else>&lt;</span>
+        </button>
       </div>
     </template>
 
@@ -100,6 +111,37 @@ const tools = computed<ToolCategory[]>(() => [
   color: #838587;
   margin-top: 20px;
   padding: 20px 0;
+}
+
+
+.sider-main-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.sider-toggle-btn-fixed {
+  position: absolute;
+  top: 50%;
+  right: -16px;
+  transform: translateY(-50%);
+  z-index: 100;
+  width: 32px;
+  height: 48px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 8px #0001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #888;
+  font-size: 20px;
+  transition: background 0.2s, color 0.2s;
+}
+.sider-toggle-btn-fixed:hover {
+  background: v-bind('themeVars.primaryColor');
+  color: #fff;
 }
 
 .sider-content {
@@ -146,3 +188,6 @@ const tools = computed<ToolCategory[]>(() => [
   }
 }
 </style>
+.sider-main-wrapper {
+.sider-main-wrapper {
+.sider-main-wrapper {
