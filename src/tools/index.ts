@@ -1,3 +1,4 @@
+import { prompt_m } from '@/tools/prompt_manager';
 import type { ToolCategory } from '@/tools/tools.types';
 import { jsonTools } from '@/tools/jsonx';
 import { promptTools } from '@/tools/prompt';
@@ -13,6 +14,7 @@ export const toolsByCategory: ToolCategory[] = [
     components: [
       jsonTools,
       promptTools,
+      prompt_m,
       regexTools,
     ],
   },
