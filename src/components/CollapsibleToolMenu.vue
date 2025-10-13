@@ -86,6 +86,22 @@ const themeVars = useThemeVars();
       left: 0;
       right: 13px;
     }
+    ::v-deep(.n-menu-item .n-menu-item-content__icon .menu-icon-item) {
+      position: relative;
+      top: 1.5px; /* 可调成 1~2px 之间试试 */
+    }
+    ::v-deep(.n-menu-item .n-menu-item-content--selected .n-menu-item-content__icon .menu-icon-item) {
+      color: #2E8BE6;
+    }
+    ::v-deep(.n-menu-item .n-menu-item-content--selected .n-menu-item-content-header .router-link-active) {
+      color: #2E8BE6;
+    }
+    ::v-deep(.n-menu-item-content.n-menu-item-content--selected)::before {
+      background-color: #F5F8FC; /* 深蓝灰 */
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      border: #5AA9F2 2px;
+    }
   }
 
   .toggle-bar {
