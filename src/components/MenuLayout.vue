@@ -14,6 +14,7 @@ const siderPosition = computed(() => (props.isSmallScreen ? 'absolute' : 'static
       :show-trigger="false"
       :native-scrollbar="false"
       :position="siderPosition"
+      class="custom-scroll-container"
     >
       <slot name="sider" />
     </n-layout-sider>
@@ -44,5 +45,10 @@ const siderPosition = computed(() => (props.isSmallScreen ? 'absolute' : 'static
 
 .n-layout {
   height: 100vh;
+}
+.custom-scroll-container {
+  ::v-deep(.n-scrollbar-content) {
+    height: 100%;
+  }
 }
 </style>
