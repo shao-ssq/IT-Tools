@@ -13,10 +13,10 @@ export const { themes: appThemes, useTheme: useAppTheme } = defineThemes({
       colorPressed: 'rgba(46, 51, 56, 0.22)',
     },
     primary: {
-      color: '#18a058',
-      colorHover: '#1ea54c',
-      colorPressed: '#0C7A43',
-      colorFaded: '#18a0582f',
+      color: '#e74c3c',
+      colorHover: '#ff6b5a', // 悬停：更亮一些的珊瑚红
+      colorPressed: '#c0392b', // 点击：更深的砖红
+      colorFaded: '#e74c3c20', // 淡化：带透明度的红
     },
     warning: {
       color: '#f59e0b',

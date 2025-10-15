@@ -1,9 +1,8 @@
 <script lang="ts" setup>
+import { onMounted, ref } from 'vue';
 import { NIcon, useThemeVars } from 'naive-ui';
-
 import { RouterLink } from 'vue-router';
 import { Menu2 } from '@vicons/tabler';
-
 import { storeToRefs } from 'pinia';
 import HeroGradient from '../assets/hero-gradient.svg?component';
 import MenuLayout from '../components/MenuLayout.vue';
@@ -26,7 +25,6 @@ const { t } = useI18n();
 const toolStore = useToolStore();
 const { favoriteTools, toolsByCategory } = storeToRefs(toolStore);
 
-
 const tools = computed<ToolCategory[]>(() => [
   ...(favoriteTools.value.length > 0 ? [{ name: t('tools.categories.favorite-tools'), components: favoriteTools.value }] : []),
   ...toolsByCategory.value,
@@ -36,17 +34,43 @@ const isCollapsed = ref(false);
 function toggleSider() {
   isCollapsed.value = !isCollapsed.value;
 }
+
+const visitCount = ref<string>('加载中...');
+
+async function updateVisits() {
+  try {
+    // GET 或 POST 取决于你后端接口，这里用 GET（你先前 server 返回 GET /api/visits）
+    const res = await fetch('http://127.0.0.1:5000/api/visits', { method: 'GET' });
+    // eslint-disable-next-line max-statements-per-line
+    if (!res.ok) { throw new Error(`HTTP ${res.status}`); }
+    // eslint-disable-next-line no-console
+    const data = await res.json();
+    // 安全赋值，避免 undefined 报错
+    visitCount.value = String(data);
+    // eslint-disable-next-line no-console
+    console.log(visitCount.value);
+  }
+  catch (e) {
+    console.error('访问统计失败', e);
+    visitCount.value = '错误';
+  }
+}
+
+// 等组件挂载后再调用（避免 DOM 未就绪 / SSR 问题）
+onMounted(() => {
+  updateVisits();
+});
 </script>
 
 <template>
-  <MenuLayout class="menu-layout" :class="{ isSmallScreen: styleStore.isSmallScreen }" :collapsed="isCollapsed" :isSmallScreen="styleStore.isSmallScreen">
+  <MenuLayout class="menu-layout" :class="{ isSmallScreen: styleStore.isSmallScreen }" :collapsed="isCollapsed" :is-small-screen="styleStore.isSmallScreen">
     <template #sider>
       <div class="sider-main-wrapper">
         <RouterLink v-if="!isCollapsed" to="/" class="hero-wrapper">
           <HeroGradient class="gradient" />
           <div class="text-wrapper">
             <div class="title">
-              天工 AI
+              天工智匣
             </div>
             <div class="divider" />
             <div class="subtitle">
@@ -66,9 +90,11 @@ function toggleSider() {
 
           <CollapsibleToolMenu :tools-by-category="tools" :collapsed="isCollapsed" />
 
-          <div v-if="!isCollapsed" class="footer" />
+          <div v-if="!isCollapsed" class="footer">
+            访问量：<span id="visitCount">{{visitCount}}</span>
+          </div>
         </div>
-        <button class="sider-toggle-btn-fixed" :class="{ collapsed: isCollapsed }" @click="toggleSider" aria-label="Toggle menu">
+        <button class="sider-toggle-btn-fixed" :class="{ collapsed: isCollapsed }" aria-label="Toggle menu" @click="toggleSider">
           <NIcon>
             <Menu2 />
           </NIcon>
@@ -83,7 +109,6 @@ function toggleSider() {
 </template>
 
 <style lang="less" scoped>
-
 .support-button {
   background: rgb(37, 99, 108);
   background: linear-gradient(48deg, rgba(37, 99, 108, 1) 0%, rgba(59, 149, 111, 1) 60%, rgba(20, 160, 88, 1) 100%);
@@ -98,10 +123,12 @@ function toggleSider() {
 }
 
 .footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   text-align: center;
-  color: #838587;
-  margin-top: 20px;
-  padding: 20px 0;
+  padding: 10px;
 }
 
 .sider-main-wrapper {
