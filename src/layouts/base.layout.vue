@@ -40,7 +40,7 @@ const visitCount = ref<string>('加载中...');
 async function updateVisits() {
   try {
     // GET 或 POST 取决于你后端接口，这里用 GET（你先前 server 返回 GET /api/visits）
-    const res = await fetch('http://127.0.0.1:5000/api/visits', { method: 'GET' });
+    const res = await fetch('http://172.21.3.56:5000/api/visits', { method: 'GET' });
     // eslint-disable-next-line max-statements-per-line
     if (!res.ok) { throw new Error(`HTTP ${res.status}`); }
     const data = await res.json();

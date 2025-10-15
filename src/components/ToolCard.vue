@@ -8,7 +8,7 @@ const { tool } = toRefs(props);
 const theme = useThemeVars();
 
 function addVisits() {
-  fetch('http://127.0.0.1:5000/api/visits', { method: 'POST' });
+  fetch('http://172.21.3.56:5000/api/visits', { method: 'POST' });
 }
 </script>
 
