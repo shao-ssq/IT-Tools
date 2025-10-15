@@ -127,15 +127,13 @@ onMounted(() => {
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: center;
+  left: -160px;
   pointer-events: none; /* 不阻塞可点击元素，内部可启用 */
   z-index: 50;
 }
 
 .footer-inner {
   pointer-events: auto;
-  max-width: 1200px; /* 与主内容对齐的最大宽度 */
-  width: 100%;
   box-sizing: border-box;
   text-align: center;
   padding: 8px 16px;
