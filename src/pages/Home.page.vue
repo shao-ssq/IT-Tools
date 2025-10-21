@@ -10,7 +10,7 @@ import { config } from '@/config';
 
 const toolStore = useToolStore();
 
-useHead({ title: '天工智匣 - 智慧触手可及' });
+useHead({ title: '天工灵匣 - 智慧触手可及' });
 const { t } = useI18n();
 
 const favoriteTools = computed(() => toolStore.favoriteTools);

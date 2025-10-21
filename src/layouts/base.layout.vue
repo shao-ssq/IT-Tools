@@ -64,7 +64,7 @@ onMounted(() => {
           <HeroGradient class="gradient" />
           <div class="text-wrapper">
             <div class="title">
-              天工智匣
+              天工灵匣
             </div>
             <div class="divider" />
             <div class="subtitle">
