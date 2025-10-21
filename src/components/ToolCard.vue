@@ -6,9 +6,9 @@ import type { Tool } from '@/tools/tools.types';
 const props = defineProps<{ tool: Tool & { category: string } }>();
 const { tool } = toRefs(props);
 const theme = useThemeVars();
-
+const SERVER_URL = import.meta.env.VITE_API_BASE_URL;
 function addVisits() {
-  fetch('http://172.21.3.56:5000/api/visits', { method: 'POST' });
+  fetch(`${SERVER_URL}/api/visits`, { method: 'POST' });
 }
 </script>
 

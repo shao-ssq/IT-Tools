@@ -40,6 +40,17 @@ const menuOptions = computed(() =>
     })),
   })),
 );
+const SERVER_URL = import.meta.env.VITE_API_BASE_URL;
+function addVisits() {
+  fetch(`${SERVER_URL}/api/visits`, { method: 'POST' })
+    .then(() => fetch(`${SERVER_URL}/api/visits`))
+    .then(res => res.json())
+    .then((data) => {
+      const el = document.getElementById('visitCount');
+      // eslint-disable-next-line max-statements-per-line
+      if (el) { el.textContent = data; }
+    });
+}
 
 const themeVars = useThemeVars();
 </script>
@@ -68,6 +79,7 @@ const themeVars = useThemeVars();
           :options="tools"
           :indent="8"
           :default-expand-all="true"
+          @select="addVisits"
         />
       </div>
     </n-collapse-transition>

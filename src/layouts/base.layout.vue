@@ -36,26 +36,20 @@ function toggleSider() {
 }
 
 const visitCount = ref<string>('加载中...');
-
+const SERVER_URL = import.meta.env.VITE_API_BASE_URL;
 async function updateVisits() {
+  await new Promise(resolve => setTimeout(resolve, 200));
   try {
-    // GET 或 POST 取决于你后端接口，这里用 GET（你先前 server 返回 GET /api/visits）
-    const res = await fetch('http://172.21.3.56:5000/api/visits', { method: 'GET' });
+    const res = await fetch(`${SERVER_URL}/api/visits`, { method: 'GET' });
     // eslint-disable-next-line max-statements-per-line
     if (!res.ok) { throw new Error(`HTTP ${res.status}`); }
-    // eslint-disable-next-line no-console
     const data = await res.json();
-    // 安全赋值，避免 undefined 报错
     visitCount.value = String(data);
-    // eslint-disable-next-line no-console
-    console.log(visitCount.value);
   }
   catch (e) {
-    console.error('访问统计失败', e);
     visitCount.value = '错误';
   }
 }
-
 // 等组件挂载后再调用（避免 DOM 未就绪 / SSR 问题）
 onMounted(() => {
   updateVisits();
@@ -88,7 +82,7 @@ onMounted(() => {
             </div>
           </div>
 
-          <CollapsibleToolMenu :tools-by-category="tools" :collapsed="isCollapsed" />
+          <CollapsibleToolMenu :tools-by-category="tools" :collapsed="isCollapsed"/>
 
           <div v-if="!isCollapsed" class="footer">
             访问量：<span id="visitCount">{{visitCount}}</span>
