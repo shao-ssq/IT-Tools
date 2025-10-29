@@ -7,12 +7,14 @@ import { aipptTools } from '@/tools/ppt';
 import { mindTools } from '@/tools/mind';
 import { codeMap } from '@/tools/code';
 import { mermaid } from '@/tools/mermaid';
+import { diffTools } from '@/tools/diff';
 
 export const toolsByCategory: ToolCategory[] = [
   {
     name: 'text',
     components: [
       jsonTools,
+      diffTools,
       promptTools,
       prompt_m,
       regexTools,

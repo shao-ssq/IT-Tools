@@ -1,7 +1,7 @@
 import { Braces } from '@vicons/tabler';
 import { defineTool } from '../tool';
 
-export const jsonTools = defineTool({
+export const diffTools = defineTool({
   name: '文本对比',
   path: '/diff',
   description: 'GitHub样式的文本对比模式，更加适合程序员',
