@@ -8,5 +8,5 @@ export const diffTools = defineTool({
   keywords: ['json', 'xml', '可视化'],
   component: () => import('./google.vue'),
   icon: FileDiff,
-  createdAt: new Date('2025-10-29'),
+  createdAt: new Date('2023-10-29'),
 });

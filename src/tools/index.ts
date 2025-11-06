@@ -8,6 +8,7 @@ import { mindTools } from '@/tools/mind';
 import { codeMap } from '@/tools/code';
 import { mermaid } from '@/tools/mermaid';
 import { diffTools } from '@/tools/diff';
+import { excelTools } from '@/tools/excel';
 
 export const toolsByCategory: ToolCategory[] = [
   {
@@ -23,9 +24,10 @@ export const toolsByCategory: ToolCategory[] = [
   {
     name: '设计',
     components: [
-      aipptTools,
-      mindTools,
       mermaid,
+      mindTools,
+      excelTools,
+      aipptTools,
     ],
   },
   {
