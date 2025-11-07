@@ -1,17 +1,28 @@
-<template>
-  <iframe
-    src="http://172.21.3.56:8299/"
-    class="full-iframe"
-  />
-</template>
+<script setup>
+import { onMounted } from 'vue';
 
-<style scoped>
-.full-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-</style>
+onMounted(() => {
+  window.open('http://tgai.weoa.com:8299/', '_blank')
+})
+</script>
+
+<template>
+  <div class="tool-layout">
+    <div class="tool-header">
+      <div flex flex-nowrap items-center justify-between>
+        <n-h1>
+          Chat PPT
+        </n-h1>
+
+        <div>
+        </div>
+      </div>
+
+      <div class="separator" />
+
+      <div class="description">
+        AI驱动，快速打造专业、多种风格的PPT。
+      </div>
+    </div>
+  </div>
+</template>
